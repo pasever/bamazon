@@ -46,21 +46,20 @@ function availability() {
         console.log(results);
         console.log(typeof parseInt(answer.itemID));
         console.log(parseInt(answer.itemQTY));
-        var stock = false;
+        let stock = false;
         
-        //checking if itemID in database = itemID entered
         for (var i = 0; i < results.length; i++) {
           
           if (results[i].item_id == answer.itemID && results[i].stock_quantity > answer.itemQTY) {
             stock = true;
             console.log("Yep, we have that in stock...");
-            console.log("Qty in more then enough...");
+            console.log("Qty is enough to fulfill order...");
           }
         }      
       
-      if (stock) {
-        console.log("Qty is not enough...");
-        availability();        
+      if (!stock) {
+        console.log("Insufficient quantity!");
+        //availability();        
       }
     });
   });
