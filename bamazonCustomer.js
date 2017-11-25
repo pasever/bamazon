@@ -1,33 +1,29 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
-var connection = mysql.createConnection(
-  {
-      host: "localhost", 
-      port: 3306, 
-      user: "root", 
-      password: "root", 
-      database: "bamazon"
-});
+var connection = mysql.createConnection({host: "localhost", port: 3306, user: "root", password: "root", database: "bamazon"});
 
-connection.connect(function(err) {
-  if (err) 
-    throw err;
-  
-  //console.log("connected as id " + connection.threadId);
-  afterConnection();
-});
-
+function customerJS(name) {
+  connection.connect(function(err) {
+    if (err) 
+      throw err;
+      console.log("");
+      console.log(`Welcome to BAMAZON ${name.trim()}!`);
+      console.log("");
+    //console.log("connected as id " + connection.threadId);
+    afterConnection();
+  });
+}
 function afterConnection() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) 
-      throw err;
-    console.log("Welcome to BAMAZON!")
-    console.log("Items in stock:");
+      throw err;  
+  
+    console.log(`Items we have in stock:`);
     console.log("_________________________________________");
     console.log("");
     for (var i = 0; i < res.length; i++) {
-      console.log(res[i].item_id + " | " + res[i].product_name + " | $" + res[i].price + "ea" + " | Qty: " + res[i].stock_quantity);
+      console.log("| " + res[i].item_id + " | " + res[i].product_name + " | $" + res[i].price + "ea" + " | Qty: " + res[i].stock_quantity);
     }
     console.log("_________________________________________");
     console.log("");
@@ -95,7 +91,7 @@ function checkAvailability(item, quantity) {
 
           // update database qty
           //database.updateStock(id, newQty);
-          
+
           // update sales qty
           //database.addSale(department, total);
 
@@ -103,7 +99,7 @@ function checkAvailability(item, quantity) {
             {
               name: 'confirm',
               type: 'confirm',
-              message: 'Return to home page?'
+              message: 'Return to the main page?'
             }
           ]).then(function(answer) {
             if (answer.confirm) {
@@ -115,7 +111,7 @@ function checkAvailability(item, quantity) {
           });
         } else {
           console.log("");
-          console.log('Returning to home page...');
+          console.log('Returning to the page ...');
           console.log("");
           availability();
 
@@ -124,3 +120,5 @@ function checkAvailability(item, quantity) {
     }
   });
 }
+
+exports.customerJS = customerJS;
