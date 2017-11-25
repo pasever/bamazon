@@ -1,8 +1,17 @@
-var mysql = require("mysql");
-var inquirer = require("inquirer");
+const mysql = require("mysql");
+const inquirer = require("inquirer");
 
-var connection = mysql.createConnection({host: "localhost", port: 3306, user: "root", password: "root", database: "bamazon"});
+//connectin mysql
+const connection = mysql.createConnection(
+  {
+    host: "localhost", 
+    port: 3306, 
+    user: "root", 
+    password: "root", 
+    database: "bamazon"
+  }); 
 
+//calling a display function and passing the guest name given to us on the main page
 function customerJS(name) {
   connection.connect(function(err) {
     if (err) 
@@ -11,9 +20,11 @@ function customerJS(name) {
       console.log(`Welcome to BAMAZON ${name.trim()}!`);
       console.log("");
     //console.log("connected as id " + connection.threadId);
-    afterConnection();
+    setTimeout(afterConnection, 2000);
   });
 }
+
+//displaying all available products
 function afterConnection() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) 
@@ -27,11 +38,12 @@ function afterConnection() {
     }
     console.log("_________________________________________");
     console.log("");
-    //console.log(res);
+    
     availability();
   });
 }
 
+//staring placing an order
 function availability() {
 
   inquirer.prompt([
@@ -52,13 +64,14 @@ function availability() {
     }, function(err, results) {
       if (err) 
         throw err;
-      
+    
       checkAvailability(answer.itemID, answer.itemQTY);
 
     });
   });
 }
 
+//checking if we have enough qty in stock before placing the order 
 function checkAvailability(item, quantity) {
   connection.query("SELECT price, stock_quantity, product_sales FROM products WHERE ?", {
     item_id: item
@@ -72,10 +85,11 @@ function checkAvailability(item, quantity) {
       var total = parseFloat(result[0].price * quantity).toFixed(2);
       var newQty = result[0].stock_quantity - quantity;
       console.log("");
-      console.log("Qty is enough to fulfill your order...");
+      console.log("We have enough in stock to fulfill your order...");
       console.log("Your total is going to be $" + total);
       console.log("");
-
+      
+      //order placing verification 
       inquirer.prompt([
         {
           name: 'confirm',
@@ -90,10 +104,7 @@ function checkAvailability(item, quantity) {
           console.log("");
 
           // update database qty
-          //database.updateStock(id, newQty);
-
-          // update sales qty
-          //database.addSale(department, total);
+          updateQty(item, newQty);
 
           inquirer.prompt([
             {
@@ -103,7 +114,7 @@ function checkAvailability(item, quantity) {
             }
           ]).then(function(answer) {
             if (answer.confirm) {
-              availability();
+              afterConnection();
             } else {
               console.log('Thank you for BAMAZONing!');
               process.exit();
@@ -111,14 +122,24 @@ function checkAvailability(item, quantity) {
           });
         } else {
           console.log("");
-          console.log('Returning to the page ...');
+          console.log('Returning to the order page ...');
           console.log("");
-          availability();
+          afterConnection();
 
         }
       });
     }
   });
+}
+
+//updating qty in our databases
+function updateQty(item, newQty) {
+     connection.query('UPDATE products SET ? WHERE ?', [{
+        stock_quantity: newQty
+    }, {
+        item_id: item
+    }]);
+    console.log("Databases have been updated");
 }
 
 exports.customerJS = customerJS;

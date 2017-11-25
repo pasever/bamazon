@@ -10,16 +10,17 @@ inquirer.prompt([
         message: 'What is your Level of Access?',
         choices: ['Customer','Manager','Supervisor','Exit']
     }
-, {
-  name: "guest",
-  type: "input",
-  message: "Please type in your name (or user ID)"
-}
+   ,{
+    name: "guest",
+    type: "input",
+    message: "Please type in your name (or user ID)"
+    }
 ])
-.then(function(answer) {
+.then(
+  function(answer) {
     
     switch(answer.position) {
-      // let newName = answer.guest;
+
         case 'Customer' :            
             //console.log("Welcome Customer");
             customer.customerJS(answer.guest);
@@ -33,7 +34,7 @@ inquirer.prompt([
             supervisor.supervisorJS(answer.guest);
             break;
         case 'Exit' :
-            console.log('You were successfully logged out');
+            console.log(`Thank for visiting ${answer.guest}`);
             process.exit();
             break;
     }
