@@ -1,5 +1,8 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const Table = require('cli-table');
+ 
+
 
 //connectin mysql
 const connection = mysql.createConnection(
@@ -29,15 +32,17 @@ function afterConnection() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) 
       throw err;  
+      // instantiate 
+      var table = new Table({
+          head: ['Item #', 'Name', 'Price/each', 'Quantity'],
+          colWidths: [10, 20, 20, 10]
+      });
   
-    console.log(`Items we have in stock:`);
-    console.log("_________________________________________");
-    console.log("");
     for (var i = 0; i < res.length; i++) {
-      console.log("| " + res[i].item_id + " | " + res[i].product_name + " | $" + res[i].price + "ea" + " | Qty: " + res[i].stock_quantity);
+      //console.log("| " + res[i].item_id + " | " + res[i].product_name + " | $" + res[i].price + "ea" + " | Qty: " + res[i].stock_quantity);
+      table.push([res[i].item_id, res[i].product_name, res[i].price, res[i].stock_quantity] );
     }
-    console.log("_________________________________________");
-    console.log("");
+    console.log(table.toString());
     
     availability();
   });
