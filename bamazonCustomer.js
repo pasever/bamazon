@@ -34,8 +34,9 @@ function afterConnection() {
       throw err;  
       // instantiate 
       var table = new Table({
-          head: ['Item #', 'Name', 'Price/each', 'Quantity'],
-          colWidths: [10, 20, 20, 10]
+          head: ['Item#', 'Name', 'Price', 'Qty'],
+          colWidths: [8, 20, 12, 12]
+          //style: { 'padding': 5 }
       });
   
     for (var i = 0; i < res.length; i++) {
