@@ -6,9 +6,12 @@ const display = require('./mysql.js');
 const users = require('./bamazon.js');
  
 function managerJS(name){
-  console.log("");
+  console.log('###############################');
+  console.log('');
   console.log(`Welcome to the manager's portal ${name.trim()}`);
-  console.log("");  
+  console.log('');
+  console.log('###############################');
+  console.log(''); 
   options();
 }
 
@@ -49,7 +52,7 @@ function options() {
                   addToInv();
                   break;
               case 'Add New Product' :
-                  //addProduct();
+                  addProduct();
                   break;   
               case 'Main Menu' :
                   users.users();
@@ -69,12 +72,12 @@ function lowInv(){
       
       // instantiate 
       var table = new Table({
-          head: ['Item#', 'Name', 'Price', 'Qty', 'Sales'],
-          colWidths: [8, 18, 12, 12, 12]
+          head: ['Item#', 'Name', 'Department', 'Price', 'Qty', 'Sales'],
+          colWidths: [8, 18, 18, 12, 12, 12]
       });
   
     for (var i = 0; i < res.length; i++) {
-      table.push([res[i].item_id, res[i].product_name, res[i].price, res[i].stock_quantity, res[i].product_sales]);
+      table.push([res[i].item_id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity, res[i].product_sales]);
     }
     console.log(table.toString());
     setTimeout(mainPage, 5000);
@@ -87,7 +90,7 @@ function addToInv(){
       {
             name: "itemID",
             type: "input",
-            message: "Which ID# you want to add qty to?"
+            message: "Which item # you want to add qty to?"
       }, {
             name: "itemQTY",
             type: "input",
@@ -130,6 +133,38 @@ function mainPage(){
         users.users();
     }
   });
+}
+
+function addProduct(){
+  inquirer.prompt([
+    {
+          name: "productName",
+          type: "input",
+          message: "What is the name of the new product?"
+    }, {
+          name: "productDept",
+          type: "input",
+          message: "Which department new product is going to?"
+    }, {
+          name: "productCost",
+          type: "input",
+          message: "What is the cost (per each) of the new product?"
+    }, {
+          name: "productQty",
+          type: "input",
+          message: "How many (in eaches) did store received?"                
+    }
+      ])
+      .then(function(answer, err) {        
+        SQL.connection.query('INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)', 
+          [
+            answer.productName, answer.productDept, answer.productCost, answer.productQty                       
+          ]);
+           if (err) throw err;
+           console.log("Databases have been successfully updated");
+           setTimeout(display.displayTable, 2000);
+           setTimeout(mainPage, 4000);
+    });    
 }
 
 exports.managerJS = managerJS;

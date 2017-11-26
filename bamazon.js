@@ -25,15 +25,12 @@ users();
       switch(answer.position) {
 
           case 'Customer' :            
-              //console.log("Welcome Customer");
               customer.customerJS(answer.guest);
               break;
           case 'Manager' :
-              //console.log("Welcome Manager");
               manager.managerJS(answer.guest);
               break;
           case 'Supervisor' :
-              //console.log("Welcome Supervisor");
               supervisor.supervisorJS(answer.guest);
               break;
           case 'Exit' :

@@ -10,9 +10,11 @@ function customerJS(name) {
   SQL.connection.connect(function(err) {
     if (err) 
       throw err;
+      console.log('###############################');
       console.log("");
       console.log(`Welcome to BAMAZON ${name.trim()}!`);
       console.log("");
+      console.log('###############################');
     //console.log("connected as id " + connection.threadId);
     setTimeout(afterConnection, 2000);
   });
@@ -123,7 +125,7 @@ function updateQty(item, newQty) {
     }, {
         item_id: item
     }]);
-    console.log("Databases have been updated");
+    console.log("Databases have been successfully updated");
 }
 
 exports.customerJS = customerJS;
