@@ -18,7 +18,7 @@ const connection = mysql.createConnection(
         // instantiate 
         var table = new Table({
             head: ['Item#', 'Name', 'Price', 'Qty'],
-            colWidths: [8, 20, 12, 12]
+            colWidths: [7, 20, 13, 13]
             //style: { 'padding': 5 }
         });
     

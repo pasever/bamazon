@@ -31,7 +31,7 @@ function availability() {
     {
       name: "itemID",
       type: "input",
-      message: "What is the ID of item you are looking for?"
+      message: "What is the ID# of the item you are looking for?"
     }, {
       name: "itemQTY",
       type: "input",
@@ -100,6 +100,7 @@ function checkAvailability(item, quantity) {
             } else {
               console.log('Returning to the Users Menu');
               users.users();
+              return
             }
           });
         } else {
@@ -115,8 +116,9 @@ function checkAvailability(item, quantity) {
 }
 
 //updating qty in our databases
-function updateQty(item, newQty) {
-     SQL.connection.query('UPDATE products SET ? WHERE ?', [{
+function updateQty(item, newQty) {  
+  
+    SQL.connection.query('UPDATE products SET ? WHERE ?', [{
         stock_quantity: newQty
     }, {
         item_id: item

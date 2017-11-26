@@ -23,7 +23,7 @@ function options() {
                        'View Low Inventory', 
                        'Add to Inventory', 
                        'Add New Product',
-                       'Users Menu',
+                       'Main Menu',
                        'Exit'
                     ]
         }
@@ -51,7 +51,7 @@ function options() {
               case 'Add New Product' :
                   //addProduct();
                   break;   
-              case 'Users Menu' :
+              case 'Main Menu' :
                   users.users();
                   break;     
               case 'Exit' :
@@ -83,30 +83,38 @@ function lowInv(){
 }
 
 function addToInv(){
-  
-inquirer.prompt([
-  {
-        name: "itemID",
-        type: "input",
-        message: "Which ID# you want to add qty to?"
-  }, {
-        name: "itemQTY",
-        type: "input",
-        message: "How many do you want to add?"
-      }
-    ])
-    .then(function(answer) {
-      //let updatedQty = oldQty + answer.itemQty;
-      SQL.connection.query('UPDATE products SET ? WHERE ?', [{
-         stock_quantity: answer.itemQTY
-     }, {
-         item_id: answer.itemID
-     }]);
-     console.log("Databases have been updated");
-     setTimeout(display.displayTable, 2000);
-     setTimeout(mainPage, 3000);
-  });    
-}
+    inquirer.prompt([
+      {
+            name: "itemID",
+            type: "input",
+            message: "Which ID# you want to add qty to?"
+      }, {
+            name: "itemQTY",
+            type: "input",
+            message: "How many do you want to add?"
+          }
+        ])
+        .then(function(answer) {
+          
+          SQL.connection.query("SELECT stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function(err, res) {
+            if (err) 
+              throw err;  
+              let oldQty = res[0].stock_quantity;
+              addQty(oldQty);
+          });
+          
+      function addQty(q){
+          SQL.connection.query('UPDATE products SET ? WHERE ?', [{
+             stock_quantity: parseInt(answer.itemQTY) + q
+         }, {
+             item_id: answer.itemID
+         }]);
+       }
+         console.log("Databases have been updated");
+         setTimeout(display.displayTable, 2000);
+         setTimeout(mainPage, 3000);
+      });    
+    }
 
 function mainPage(){  
     inquirer.prompt([
@@ -119,8 +127,7 @@ function mainPage(){
       if (answer.confirm) {
         options();
     } else {
-      console.log('Thank you for BAMAZONing!');
-      process.exit();
+        users.users();
     }
   });
 }

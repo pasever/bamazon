@@ -37,7 +37,7 @@ users();
               supervisor.supervisorJS(answer.guest);
               break;
           case 'Exit' :
-              console.log(`Thank for visiting ${answer.guest}`);
+              console.log(`Thank for visiting us ${answer.guest}`);
               process.exit();
               break;
     }
