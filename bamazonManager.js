@@ -2,6 +2,7 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
 const SQL = require('./mysql.js');
+const display = require('./mysql.js');
  
 function managerJS(name){
   console.log("");
@@ -27,7 +28,7 @@ function options() {
        ,{
           name: "pass",
           type: "input",
-          message: "Please type in your password for security purposes"
+          message: "For security purposes, please type in your password"
         }
     ])
     .then(
@@ -36,11 +37,10 @@ function options() {
           switch(answer.option) {
 
               case 'View Products for Sale' :            
-                  //console.log("Welcome Customer");
-                  //forSale();
+                  display.displayTable();
+                  setTimeout(mainPage, 5000);
                   break;
               case 'View Low Inventory' :
-                  //console.log("Welcome Manager");
                   lowInv();
                   break;
               case 'Add to Inventory' :

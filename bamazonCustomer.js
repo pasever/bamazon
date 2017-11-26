@@ -2,6 +2,7 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
 const SQL = require('./mysql.js');
+const display = require('./mysql.js');
  
 //calling a display function and passing the guest name given to us on the main page
 function customerJS(name) {
@@ -16,27 +17,11 @@ function customerJS(name) {
   });
 }
 
-//displaying all available products
-function afterConnection() {
-  SQL.connection.query("SELECT * FROM products", function(err, res) {
-    if (err) 
-      throw err;  
-      // instantiate 
-      var table = new Table({
-          head: ['Item#', 'Name', 'Price', 'Qty'],
-          colWidths: [8, 20, 12, 12]
-          //style: { 'padding': 5 }
-      });
-  
-    for (var i = 0; i < res.length; i++) {
-      //console.log("| " + res[i].item_id + " | " + res[i].product_name + " | $" + res[i].price + "ea" + " | Qty: " + res[i].stock_quantity);
-      table.push([res[i].item_id, res[i].product_name, res[i].price, res[i].stock_quantity] );
-    }
-    console.log(table.toString());
-    
-    availability();
-  });
+function afterConnection(){
+  display.displayTable();
+  setTimeout(availability, 2000);
 }
+
 
 //staring placing an order
 function availability() {
