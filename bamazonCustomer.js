@@ -1,22 +1,11 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
+const SQL = require('./mysql.js');
  
-
-
-//connectin mysql
-const connection = mysql.createConnection(
-  {
-    host: "localhost", 
-    port: 3306, 
-    user: "root", 
-    password: "root", 
-    database: "bamazon"
-  }); 
-
 //calling a display function and passing the guest name given to us on the main page
 function customerJS(name) {
-  connection.connect(function(err) {
+  SQL.connection.connect(function(err) {
     if (err) 
       throw err;
       console.log("");
@@ -29,7 +18,7 @@ function customerJS(name) {
 
 //displaying all available products
 function afterConnection() {
-  connection.query("SELECT * FROM products", function(err, res) {
+  SQL.connection.query("SELECT * FROM products", function(err, res) {
     if (err) 
       throw err;  
       // instantiate 
@@ -64,7 +53,7 @@ function availability() {
     }
   ]).then(function(answer) {
 
-    connection.query("SELECT * FROM products", {
+    SQL.connection.query("SELECT * FROM products", {
       item_id: answer.itemID,
       item_qty: answer.itemQTY
     }, function(err, results) {
@@ -79,7 +68,7 @@ function availability() {
 
 //checking if we have enough qty in stock before placing the order 
 function checkAvailability(item, quantity) {
-  connection.query("SELECT price, stock_quantity, product_sales FROM products WHERE ?", {
+  SQL.connection.query("SELECT price, stock_quantity, product_sales FROM products WHERE ?", {
     item_id: item
   }, function(err, result) {
     if (err) 
@@ -141,7 +130,7 @@ function checkAvailability(item, quantity) {
 
 //updating qty in our databases
 function updateQty(item, newQty) {
-     connection.query('UPDATE products SET ? WHERE ?', [{
+     SQL.connection.query('UPDATE products SET ? WHERE ?', [{
         stock_quantity: newQty
     }, {
         item_id: item
