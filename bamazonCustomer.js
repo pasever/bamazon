@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const Table = require('cli-table');
 const SQL = require('./mysql.js');
 const display = require('./mysql.js');
+const users = require('./bamazon.js');
  
 //calling a display function and passing the guest name given to us on the main page
 function customerJS(name) {
@@ -97,8 +98,8 @@ function checkAvailability(item, quantity) {
             if (answer.confirm) {
               afterConnection();
             } else {
-              console.log('Thank you for BAMAZONing!');
-              process.exit();
+              console.log('Returning to the Users Menu');
+              users.users();
             }
           });
         } else {

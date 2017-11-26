@@ -10,7 +10,7 @@ users();
       {
           name: 'position',
           type: 'list',
-          message: 'What is your Level of Access?',
+          message: 'What is the Level of your Access?',
           choices: ['Customer','Manager','Supervisor','Exit']
       }
      ,{

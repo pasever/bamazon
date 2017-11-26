@@ -27,11 +27,11 @@ function options() {
                        'Exit'
                     ]
         }
-       ,{
-          name: "pass",
-          type: "input",
-          message: "For security purposes, please type in your password"
-        }
+      //  ,{
+      //     name: "pass",
+      //     type: "input",
+      //     message: "For security purposes, please type in your password"
+      //   }
     ])
     .then(
       function(answer) {
@@ -80,6 +80,32 @@ function lowInv(){
     setTimeout(mainPage, 5000);
       
   });
+}
+
+function addToInv(){
+  
+inquirer.prompt([
+  {
+        name: "itemID",
+        type: "input",
+        message: "Which ID# you want to add qty to?"
+  }, {
+        name: "itemQTY",
+        type: "input",
+        message: "How many do you want to add?"
+      }
+    ])
+    .then(function(answer) {
+      //let updatedQty = oldQty + answer.itemQty;
+      SQL.connection.query('UPDATE products SET ? WHERE ?', [{
+         stock_quantity: answer.itemQTY
+     }, {
+         item_id: answer.itemID
+     }]);
+     console.log("Databases have been updated");
+     setTimeout(display.displayTable, 2000);
+     setTimeout(mainPage, 3000);
+  });    
 }
 
 function mainPage(){  
