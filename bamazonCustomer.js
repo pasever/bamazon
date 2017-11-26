@@ -19,7 +19,7 @@ function customerJS(name) {
 
 function afterConnection(){
   display.displayTable();
-  setTimeout(availability, 2000);
+  setTimeout(availability, 4000);
 }
 
 

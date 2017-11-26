@@ -14,6 +14,7 @@ const connection = mysql.createConnection(
     connection.query("SELECT * FROM products", function(err, res) {
       if (err) 
         throw err;  
+      
         // instantiate 
         var table = new Table({
             head: ['Item#', 'Name', 'Price', 'Qty'],

@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const Table = require('cli-table');
 const SQL = require('./mysql.js');
 const display = require('./mysql.js');
+const users = require('./bamazon.js');
  
 function managerJS(name){
   console.log("");
@@ -22,6 +23,7 @@ function options() {
                        'View Low Inventory', 
                        'Add to Inventory', 
                        'Add New Product',
+                       'Users Menu',
                        'Exit'
                     ]
         }
@@ -44,13 +46,14 @@ function options() {
                   lowInv();
                   break;
               case 'Add to Inventory' :
-                  //console.log("Welcome Supervisor");
                   addToInv();
                   break;
               case 'Add New Product' :
-                  //console.log("Welcome Supervisor");
                   //addProduct();
-                  break;      
+                  break;   
+              case 'Users Menu' :
+                  users.users();
+                  break;     
               case 'Exit' :
                   console.log(`Thank for visiting...`);
                   process.exit();
@@ -84,7 +87,7 @@ function mainPage(){
       {
         name: 'confirm',
         type: 'confirm',
-        message: 'Would you like to return the options page?'
+        message: 'Would you like to return to the options page?'
       }
     ]).then(function(answer) {
       if (answer.confirm) {
