@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const customer = require('./bamazonCustomer.js');
-var manager = require('./bamazonManager.js');
-var supervisor = require('./bamazonSupervisor.js');
+const manager = require('./bamazonManager.js');
+const supervisor = require('./bamazonSupervisor.js');
 
 inquirer.prompt([
     {

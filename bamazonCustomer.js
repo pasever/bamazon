@@ -87,6 +87,7 @@ function checkAvailability(item, quantity) {
     
     if (quantity > result[0].stock_quantity) {
       console.log("Insufficient Stock for this Item!");
+      afterConnection();      
     } else {
       var total = parseFloat(result[0].price * quantity).toFixed(2);
       var newQty = result[0].stock_quantity - quantity;
