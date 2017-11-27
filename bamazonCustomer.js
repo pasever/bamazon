@@ -94,24 +94,17 @@ function checkAvailability(item, quantity) {
             {
               name: 'confirm',
               type: 'confirm',
-              message: 'Return to the main page?'
+              message: 'Do you want to continue shopping?'
             }
           ]).then(function(answer) {
             if (answer.confirm) {
-              afterConnection();
+              afterConnection();                          
             } else {
               console.log('Returning to the Users Menu');
               users.users();
-              return
             }
           });
-        } else {
-          console.log("");
-          console.log('Returning to the order page ...');
-          console.log("");
-          afterConnection();
-
-        }
+        } 
       });
     }
   });
