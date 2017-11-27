@@ -16,12 +16,43 @@ An advanced NodeJS application designed to be used in the store as well as onlin
 
 ## 
 
-Main Menu:
+Main Menu: 
 
  ![main menu](screens/Screen1.png)
+ 
+ pulling data from databases and presenting it  
+ 
  
  ##
  
  Level one: Customer
+ 
+  -- pulling data from databases and presenting to the customer
+  
+  ![screen2](screens/Screen2.png)
+  
+  -- customer is placing an order 
+  
+  ![screen3](screens/Screen3.png)
+  
+  -- if qty in our database is enough  
+  
+  ![screen4](screens/Screen4.png)
+  
+  -- confirming the order and updating the databases
+  
+  ![screen6](screens/Screen6.png)
+  
+  -- if qty is not enough
+  
+  ![screen5](screens/Screen5.png)
+  
+  -- databases are updated now. New qty reflected 
+  
+  ![screen7](screens/Screen7.png)
+  
+  ##
+  
+  Level two: Manager
  
  
