@@ -15,6 +15,7 @@ function managerJS(name){
   options();
 }
 
+//manager's menu options
 function options() {
     inquirer.prompt([     
         {
@@ -65,6 +66,7 @@ function options() {
       });
 }
 
+//checking databases for items with qty less then 5
 function lowInv(){    
   SQL.connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
     if (err) 
@@ -85,6 +87,7 @@ function lowInv(){
   });
 }
 
+//adding items to the Inventory 
 function addToInv(){
     inquirer.prompt([
       {
@@ -135,6 +138,7 @@ function mainPage(){
   });
 }
 
+//addind a new product
 function addProduct(){
   inquirer.prompt([
     {

@@ -26,7 +26,7 @@ function afterConnection(){
 }
 
 
-//staring placing an order
+//placing an order
 function availability() {
 
   inquirer.prompt([
