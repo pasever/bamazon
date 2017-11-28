@@ -5,6 +5,7 @@ const SQL = require('./mysql.js');
 const display = require('./mysql.js');
 const users = require('./bamazon.js');
  
+//greetings 
 function managerJS(name){
   console.log('###############################');
   console.log('');
