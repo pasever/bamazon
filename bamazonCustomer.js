@@ -1,28 +1,43 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
-const SQL = require('./mysql.js');
+//const SQL = require('./mysql.js');
 const display = require('./mysql.js');
 const users = require('./bamazon.js');
  
+ var mSQL;
+ 
 //calling a display function and passing the guest name given to us on the main page
-function customerJS(name) {
-  SQL.connection.connect(function(err) {
-    if (err) 
-      throw err;
+function customerJS(name, SQL) {
+  mSQL = SQL;
+  
       console.log('###############################');
       console.log("");
       console.log(`Welcome to BAMAZON ${name.trim()}!`);
       console.log("");
       console.log('###############################');
     //console.log("connected as id " + connection.threadId);
-    setTimeout(afterConnection, 2000);
-  });
-}
+    
+    afterConnection();
+  }
+  
+  // mSQL.connection.connect(function(err) {
+  //   if (err) 
+  //     throw err;
+  //     console.log('###############################');
+  //     console.log("");
+  //     console.log(`Welcome to BAMAZON ${name.trim()}!`);
+  //     console.log("");
+  //     console.log('###############################');
+  //   //console.log("connected as id " + connection.threadId);
+  //   
+  //   setTimeout(afterConnection, 2000);
+  // });
+//}
 
 function afterConnection(){
   display.displayTable();
-  setTimeout(availability, 4000);
+  setTimeout(availability, 3000);
 }
 
 
@@ -41,7 +56,7 @@ function availability() {
     }
   ]).then(function(answer) {
 
-    SQL.connection.query("SELECT * FROM products", {
+    mSQL.connection.query("SELECT * FROM products", {
       item_id: answer.itemID,
       item_qty: answer.itemQTY
     }, function(err, results) {
@@ -56,7 +71,7 @@ function availability() {
 
 //checking if we have enough qty in stock before placing the order 
 function checkAvailability(item, quantity) {
-  SQL.connection.query("SELECT price, stock_quantity, product_sales FROM products WHERE ?", {
+  mSQL.connection.query("SELECT price, stock_quantity, product_sales FROM products WHERE ?", {
     item_id: item
   }, function(err, result) {
     if (err) 
@@ -113,7 +128,7 @@ function checkAvailability(item, quantity) {
 //updating qty in our databases
 function updateQty(item, newQty) {  
   
-    SQL.connection.query('UPDATE products SET ? WHERE ?', [{
+    mSQL.connection.query('UPDATE products SET ? WHERE ?', [{
         stock_quantity: newQty
     }, {
         item_id: item

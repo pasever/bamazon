@@ -1,12 +1,16 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
-const SQL = require('./mysql.js');
+//const SQL = require('./mysql.js');
 const display = require('./mysql.js');
 const users = require('./bamazon.js');
  
+var mSQL; 
+
 //greetings 
-function managerJS(name){
+function managerJS(name, SQL){
+  mSQL = SQL;
+  
   console.log('###############################');
   console.log('');
   console.log(`Welcome to the manager's portal ${name.trim()}`);
@@ -69,7 +73,7 @@ function options() {
 
 //checking databases for items with qty less then 5
 function lowInv(){    
-  SQL.connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
+  mSQL.connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
     if (err) 
       throw err; 
       
@@ -86,6 +90,7 @@ function lowInv(){
     setTimeout(mainPage, 5000);
       
   });
+  //SQL.connection.end();
 }
 
 //adding items to the Inventory 
@@ -103,7 +108,7 @@ function addToInv(){
         ])
         .then(function(answer) {
           
-          SQL.connection.query("SELECT stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function(err, res) {
+          mSQL.connection.query("SELECT stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function(err, res) {
             if (err) 
               throw err;  
               let oldQty = res[0].stock_quantity;
@@ -111,7 +116,7 @@ function addToInv(){
           });
           
       function addQty(q){
-          SQL.connection.query('UPDATE products SET ? WHERE ?', [{
+          mSQL.connection.query('UPDATE products SET ? WHERE ?', [{
              stock_quantity: parseInt(answer.itemQTY) + q
          }, {
              item_id: answer.itemID
@@ -134,7 +139,9 @@ function mainPage(){
       if (answer.confirm) {
         options();
     } else {
+        //SQL.connection.end();
         users.users();
+        
     }
   });
 }
@@ -161,7 +168,7 @@ function addProduct(){
     }
       ])
       .then(function(answer, err) {        
-        SQL.connection.query('INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)', 
+        mSQL.connection.query('INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)', 
           [
             answer.productName, answer.productDept, answer.productCost, answer.productQty                       
           ]);

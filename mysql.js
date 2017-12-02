@@ -10,6 +10,9 @@ const connection = mysql.createConnection(
     database: "bamazon"
   }); 
   
+  //connection.connect();
+  
+  
   function displayTable() {
     connection.query("SELECT * FROM products", function(err, res) {
       if (err) 
