@@ -1,15 +1,13 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
-//const SQL = require('./mysql.js');
 const display = require('./mysql.js');
 const users = require('./bamazon.js');
- 
-var mSQL; 
+let MSQL; 
 
 //greetings 
 function managerJS(name, SQL){
-  mSQL = SQL;
+  MSQL = SQL;
   
   console.log('###############################');
   console.log('');
@@ -36,11 +34,6 @@ function options() {
                        'Exit'
                     ]
         }
-      //  ,{
-      //     name: "pass",
-      //     type: "input",
-      //     message: "For security purposes, please type in your password"
-      //   }
     ])
     .then(
       function(answer) {
@@ -73,7 +66,7 @@ function options() {
 
 //checking databases for items with qty less then 5
 function lowInv(){    
-  mSQL.connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
+  MSQL.connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
     if (err) 
       throw err; 
       
@@ -90,7 +83,6 @@ function lowInv(){
     setTimeout(mainPage, 5000);
       
   });
-  //SQL.connection.end();
 }
 
 //adding items to the Inventory 
@@ -108,7 +100,7 @@ function addToInv(){
         ])
         .then(function(answer) {
           
-          mSQL.connection.query("SELECT stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function(err, res) {
+          MSQL.connection.query("SELECT stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function(err, res) {
             if (err) 
               throw err;  
               let oldQty = res[0].stock_quantity;
@@ -116,7 +108,7 @@ function addToInv(){
           });
           
       function addQty(q){
-          mSQL.connection.query('UPDATE products SET ? WHERE ?', [{
+          MSQL.connection.query('UPDATE products SET ? WHERE ?', [{
              stock_quantity: parseInt(answer.itemQTY) + q
          }, {
              item_id: answer.itemID
@@ -168,7 +160,7 @@ function addProduct(){
     }
       ])
       .then(function(answer, err) {        
-        mSQL.connection.query('INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)', 
+        MSQL.connection.query('INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)', 
           [
             answer.productName, answer.productDept, answer.productCost, answer.productQty                       
           ]);

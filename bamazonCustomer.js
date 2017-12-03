@@ -1,15 +1,13 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require('cli-table');
-//const SQL = require('./mysql.js');
 const display = require('./mysql.js');
 const users = require('./bamazon.js');
- 
- var mSQL;
+let MSQL;
  
 //calling a display function and passing the guest name given to us on the main page
 function customerJS(name, SQL) {
-  mSQL = SQL;
+  MSQL = SQL;
   
       console.log('###############################');
       console.log("");
@@ -20,20 +18,6 @@ function customerJS(name, SQL) {
     
     afterConnection();
   }
-  
-  // mSQL.connection.connect(function(err) {
-  //   if (err) 
-  //     throw err;
-  //     console.log('###############################');
-  //     console.log("");
-  //     console.log(`Welcome to BAMAZON ${name.trim()}!`);
-  //     console.log("");
-  //     console.log('###############################');
-  //   //console.log("connected as id " + connection.threadId);
-  //   
-  //   setTimeout(afterConnection, 2000);
-  // });
-//}
 
 function afterConnection(){
   display.displayTable();
@@ -56,7 +40,7 @@ function availability() {
     }
   ]).then(function(answer) {
 
-    mSQL.connection.query("SELECT * FROM products", {
+    MSQL.connection.query("SELECT * FROM products", {
       item_id: answer.itemID,
       item_qty: answer.itemQTY
     }, function(err, results) {
@@ -71,7 +55,7 @@ function availability() {
 
 //checking if we have enough qty in stock before placing the order 
 function checkAvailability(item, quantity) {
-  mSQL.connection.query("SELECT price, stock_quantity, product_sales FROM products WHERE ?", {
+  MSQL.connection.query("SELECT price, stock_quantity, product_sales FROM products WHERE ?", {
     item_id: item
   }, function(err, result) {
     if (err) 
@@ -128,12 +112,14 @@ function checkAvailability(item, quantity) {
 //updating qty in our databases
 function updateQty(item, newQty) {  
   
-    mSQL.connection.query('UPDATE products SET ? WHERE ?', [{
+    MSQL.connection.query('UPDATE products SET ? WHERE ?', [{
         stock_quantity: newQty
     }, {
         item_id: item
     }]);
     console.log("Databases have been successfully updated");
 }
+
+
 
 exports.customerJS = customerJS;
