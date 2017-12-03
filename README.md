@@ -29,21 +29,27 @@ An advanced NodeJS application designed to be used in the store as well as onlin
   
   ![screen2](screens/Screen2.png)
   
+  
   -- customer is placing an order 
+  
   
   ![screen3](screens/Screen3.png)
   
+  
   -- if qty in our database is enough  
+  
   
   ![screen4](screens/Screen4.png)
   
-  -- confirming the order and updating the databases
+  
+  -- otherwise  -- confirming the order and updating the databases
   
   ![screen6](screens/Screen6.png)
   
   -- if qty is not enough
   
   ![screen5](screens/Screen5.png)
+  
   
   -- databases are updated now. New qty has been reflected 
   
