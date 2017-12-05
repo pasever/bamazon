@@ -23,7 +23,7 @@ An advanced NodeJS application designed to be used in the store as well as onlin
  ##
  ##
  
- Level one: Customer
+ ### Level one: Customer
  
   -- pulling data from databases and presenting the table to the customer
   
@@ -57,13 +57,13 @@ An advanced NodeJS application designed to be used in the store as well as onlin
   
   ##
   
-  Level two: Manager
+  ### Level two: Manager
   
-  -- manager's menu
+  -- manager's main menu
  
  ![screen8](screens/Screen8.png)
  
- -- products for sale available in mananger portal
+ -- products for sale available in mananger's portal
  
  ![screen9](screens/Screen9.png)
  
@@ -86,3 +86,7 @@ An advanced NodeJS application designed to be used in the store as well as onlin
  -- and ... new item it's been added
  
  ![screen14](screens/Screen14.png)
+ 
+ ### Level one: Supervisor
+ 
+   ... in progress
