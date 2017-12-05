@@ -1,11 +1,12 @@
-bamazon
+
+BAMAZON
 
 ### Overview
 
-An advanced NodeJS application designed to be used in the store as well as online, for making purchases by customers, updating store data and inventory stocks by store managers and doing even more advanced things by store supervisor, like creating a new departments, keeping track of sales, profits and etc.  
+An advanced NodeJS application designed to be used in a brick and mortar business as well as online. The application offers customers the ability to make purchases, allows store managers to update store data and inventory stocks, and can be utilized by store supervisors for a number of more advanced purposes, such as creating new departments, tracking sales and profits, etc.  
 
 
-### Build with
+### Built with
 
 - NodeJS
 - MySQL
@@ -25,33 +26,33 @@ An advanced NodeJS application designed to be used in the store as well as onlin
  
  ### Level one: Customer
  
-  -- pulling data from databases and presenting the table to the customer
+  -- Pulls data from the database and presents the table to the customer
   
   ![screen2](screens/Screen2.png)
   
   
-  -- customer is placing an order 
+  -- Customer places an order 
   
   
   ![screen3](screens/Screen3.png)
   
   
-  -- if qty in our database is enough  
+  -- If qty in our database is sufficient  
   
   
   ![screen4](screens/Screen4.png)
   
   
-  -- confirming the order and updating the databases
+  -- Confirms the order and updates the database
   
   ![screen6](screens/Screen6.png)
   
-  -- if qty is not enough
+  -- If qty is not sufficient
   
   ![screen5](screens/Screen5.png)
   
   
-  -- databases are updated now. New qty has been reflected 
+  -- The database is now updated. New qty is reflected 
   
   ![screen7](screens/Screen7.png)
   
@@ -59,31 +60,31 @@ An advanced NodeJS application designed to be used in the store as well as onlin
   
   ### Level two: Manager
   
-  -- manager's main menu
+  -- Manager's main menu
  
  ![screen8](screens/Screen8.png)
  
- -- products for sale available in mananger's portal
+ -- Products for sale available in manager's portal
  
  ![screen9](screens/Screen9.png)
  
- -- item with qty below 5
+ --Qty of item less than 5
  
  ![screen10](screens/Screen10.png)
  
- -- restocking 
+ -- Restock qty 
  
  ![screen11](screens/Screen11.png)
  
- -- new qty is been reflected in our databases
+ -- New qty is reflected in our database
  
  ![screen12](screens/Screen12.png)
  
- -- adding a new product to our databases
+ -- Add a new product to our database
  
  ![screen13](screens/Screen13.png)
  
- -- and ... new item it's been added
+ -- And ... new item successfully added
  
  ![screen14](screens/Screen14.png)
  
