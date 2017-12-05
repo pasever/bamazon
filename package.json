@@ -2,7 +2,7 @@
   "name": "bamazon",
   "version": "1.0.0",
   "description": "# Node.js & MySQL",
-  "main": "index.js",
+  "main": "bamazon.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

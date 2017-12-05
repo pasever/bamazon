@@ -1,11 +1,11 @@
 bamazon
 
-###Overview
+### Overview
 
 An advanced NodeJS application designed to be used in the store as well as online, for making purchases by customers, updating store data and inventory stocks by store managers and doing even more advanced things by store supervisor, like creating a new departments, keeping track of sales, profits and etc.  
 
 
-###Build with
+### Build with
 
 - NodeJS
 - MySQL
@@ -16,7 +16,7 @@ An advanced NodeJS application designed to be used in the store as well as onlin
 
 ## 
 
-##Main Menu: 
+### Main Menu: 
 
  ![main menu](screens/Screen1.png)
    
@@ -42,7 +42,7 @@ An advanced NodeJS application designed to be used in the store as well as onlin
   ![screen4](screens/Screen4.png)
   
   
-  -- otherwise  -- confirming the order and updating the databases
+  -- confirming the order and updating the databases
   
   ![screen6](screens/Screen6.png)
   
@@ -58,5 +58,31 @@ An advanced NodeJS application designed to be used in the store as well as onlin
   ##
   
   Level two: Manager
+  
+  -- manager's menu
  
+ ![screen8](screens/Screen8.png)
  
+ -- products for sale available in mananger portal
+ 
+ ![screen9](screens/Screen9.png)
+ 
+ -- item with qty below 5
+ 
+ ![screen10](screens/Screen10.png)
+ 
+ -- restocking 
+ 
+ ![screen11](screens/Screen11.png)
+ 
+ -- new qty is been reflected in our databases
+ 
+ ![screen12](screens/Screen12.png)
+ 
+ -- adding a new product to our databases
+ 
+ ![screen13](screens/Screen13.png)
+ 
+ -- and ... new item it's been added
+ 
+ ![screen14](screens/Screen14.png)
