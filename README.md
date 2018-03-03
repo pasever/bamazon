@@ -1,5 +1,5 @@
 
-BAMAZON
+# BAMAZON
 
 ### Overview
 
@@ -68,7 +68,7 @@ An advanced NodeJS application designed to be used in a brick and mortar busines
  
  ![screen9](screens/Screen9.png)
  
- --Qty of item less than 5
+ -- Qty of item less than 5
  
  ![screen10](screens/Screen10.png)
  
@@ -84,7 +84,7 @@ An advanced NodeJS application designed to be used in a brick and mortar busines
  
  ![screen13](screens/Screen13.png)
  
- -- And ... new item successfully added
+ -- and ... new item successfully added
  
  ![screen14](screens/Screen14.png)
  
