@@ -4,13 +4,14 @@ const manager = require('./bamazonManager.js');
 const supervisor = require('./bamazonSupervisor.js');
 const SQL = require('./mysql.js');
 
-SQL.connection.connect(function(err) {
+SQL.connection.connect(err => {
   if (err) throw err;
   users();
 });
 
  function users() {
-  inquirer.prompt([
+  
+    inquirer.prompt([
       {
           name: 'position',
           type: 'list',
@@ -23,8 +24,8 @@ SQL.connection.connect(function(err) {
           message: "Please type in your name (or user ID)"
       }
   ])
-  .then(
-    function(answer) {
+  
+  .then( answer => {
       
       switch(answer.position) {
 

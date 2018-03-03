@@ -42,7 +42,7 @@ function options() {
 
               case 'View Products for Sale' :            
                   display.displayTable();
-                  setTimeout(mainPage, 5000);
+                  setTimeout(mainPage, 3000);
                   break;
               case 'View Low Inventory' :
                   lowInv();
@@ -66,21 +66,21 @@ function options() {
 
 //checking databases for items with qty less then 5
 function lowInv(){    
-  MSQL.connection.query("SELECT * FROM products WHERE stock_quantity < 5", function(err, res) {
+  MSQL.connection.query("SELECT * FROM products WHERE stock_quantity < 5", (err, res) => {
     if (err) 
       throw err; 
       
       // instantiate 
-      var table = new Table({
+      let table = new Table({
           head: ['Item#', 'Name', 'Department', 'Price', 'Qty', 'Sales'],
           colWidths: [8, 18, 18, 12, 12, 12]
       });
   
-    for (var i = 0; i < res.length; i++) {
+    for (let i = 0; i < res.length; i++) {
       table.push([res[i].item_id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity, res[i].product_sales]);
     }
     console.log(table.toString());
-    setTimeout(mainPage, 5000);
+    setTimeout(mainPage, 3000);
       
   });
 }
@@ -98,9 +98,9 @@ function addToInv(){
             message: "How many do you want to add?"
           }
         ])
-        .then(function(answer) {
+        .then(answer => {
           
-          MSQL.connection.query("SELECT stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, function(err, res) {
+          MSQL.connection.query("SELECT stock_quantity FROM products WHERE ?", { item_id: answer.itemID }, (err, res) => {
             if (err) 
               throw err;  
               let oldQty = res[0].stock_quantity;
@@ -159,7 +159,7 @@ function addProduct(){
           message: "How many (in eaches) did store received?"                
     }
       ])
-      .then(function(answer, err) {        
+      .then((answer, err) => {        
         MSQL.connection.query('INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)', 
           [
             answer.productName, answer.productDept, answer.productCost, answer.productQty                       
@@ -167,7 +167,7 @@ function addProduct(){
            if (err) throw err;
            console.log("Databases have been successfully updated");
            setTimeout(display.displayTable, 2000);
-           setTimeout(mainPage, 4000);
+           setTimeout(mainPage, 3000);
     });    
 }
 

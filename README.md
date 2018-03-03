@@ -88,6 +88,6 @@ An advanced NodeJS application designed to be used in a brick and mortar busines
  
  ![screen14](screens/Screen14.png)
  
- ### Level one: Supervisor
+ ### Level three: Supervisor
  
    ... in progress
